@@ -15,13 +15,12 @@ export const register = async (req, res) => {
         const doc = new UserModel({
             email: req.body.email,
             userWordsList: [],
-            userName: req.body.userName,
             passwordHash
         })
         const user = await doc.save();
 
 
-        const token = jwt.sign({_id: user._id}, 'secret312', { expiresIn: '30d' })
+        const token = jwt.sign({_id: user._id}, 'secret21', { expiresIn: '30d' })
 
         
         res.json({...user._doc, token})
@@ -50,13 +49,13 @@ export const login = async (req, res) => {
             res.status(400).json({message: 'Не верный логин или пароль'})
         }
 
-        const token = jwt.sign({_id: user._id}, 'secret312', { expiresIn: '30d' })
+        const token = jwt.sign({_id: user._id}, 'secret21', { expiresIn: '30d' })
 
         res.json({...user._doc, token, statusCode: 0 })
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({message: "Не удалось авторизоваться"})
+        res.status(400).json({message: "Не удалось авторизоваться"})
     }
 }
 
