@@ -21,7 +21,7 @@ export const register = async (req, res) => {
         const user = await doc.save();
 
 
-        const token = jwt.sign({_id: user._id}, 'secret312', { expiresIn: '30d' })
+        const token = jwt.sign({_id: user._id}, 'secret21', { expiresIn: '30d' })
 
         
         res.json({...user._doc, token})
@@ -50,7 +50,7 @@ export const login = async (req, res) => {
             res.status(400).json({message: 'Не верный логин или пароль'})
         }
 
-        const token = jwt.sign({_id: user._id}, 'secret312', { expiresIn: '30d' })
+        const token = jwt.sign({_id: user._id}, 'secret21', { expiresIn: '30d' })
 
         res.json({...user._doc, token, statusCode: 0 })
         
