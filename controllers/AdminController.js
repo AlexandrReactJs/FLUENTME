@@ -18,7 +18,7 @@ export const registerAdmin = async (req, res) => {
         const admin = await doc.save();
 
 
-        const token = jwt.sign({_id: admin._id}, 'secret312', { expiresIn: '30d' })
+        const token = jwt.sign({_id: admin._id}, 'secret21', { expiresIn: '30d' })
 
         
         res.json({...admin._doc, token})
@@ -48,7 +48,7 @@ export const loginAdmin = async (req, res) => {
             res.status(400).json({message: 'Не верный логин или пароль'})
         }
 
-        const token = jwt.sign({_id: admin._id}, 'secret312', { expiresIn: '30d' })
+        const token = jwt.sign({_id: admin._id}, 'secret21', { expiresIn: '30d' })
 
         res.json({...admin._doc, token, statusCode: 0 })
         
@@ -71,7 +71,7 @@ export const adminAuthMe = async (req, res) => {
         const token = jwt.sign({
             _id: admin._id
         },
-            'secret312',
+            'secret21',
             { expiresIn: '30d' }
         )
 
