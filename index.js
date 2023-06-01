@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import { createWord, getAllWords, getOneWord } from './controllers/WordController.js';
 import { registerValidation, loginValidation } from './validations/validation.js';
 import { checkValidationError } from './utils/checkValidationError.js';
-import { register, login, authMe, addWordToUserWordList } from './controllers/UserController.js';
+import { register, login, authMe, addWordToUserWordList, removeWordFromUserWordsList } from './controllers/UserController.js';
 import { checkAuth } from './utils/checkAuth.js';
 
 import { createCategory, getAllCategory, removeCategory } from './controllers/WordsCategoryController.js';
@@ -27,8 +27,10 @@ mongoose.connect('mongodb+srv://gavalexandr732:backend_razrab@cluster0.4amzlal.m
 app.post('/auth/register', registerValidation, checkValidationError, register )
 app.post('/auth/login', loginValidation, checkValidationError, login)
 app.get('/auth/me', checkAuth, authMe)
-app.post('/user/addWordToUserWordList', checkAuth, addWordToUserWordList)
 
+
+app.post('/user/addWordToUserWordList', checkAuth, addWordToUserWordList)
+app.delete('/user/removeWordFromUserWordsList/:id', checkAuth, removeWordFromUserWordsList)
 
 app.post('/admin/register', registerAdmin)
 app.post('/admin/login', loginAdmin)
