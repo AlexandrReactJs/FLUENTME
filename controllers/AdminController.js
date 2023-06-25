@@ -40,12 +40,14 @@ export const loginAdmin = async (req, res) => {
 
         if(!admin) {
             res.status(404).json({message: 'Админ не найден'})
+            return;
         }
 
         const isValidPassword = await bcrypt.compare(req.body.password, admin._doc.passwordHash)
 
         if(!isValidPassword) {
             res.status(400).json({message: 'Не верный логин или пароль'})
+            return
         }
 
         const token = jwt.sign({_id: admin._id}, 'secret21', { expiresIn: '30d' })
@@ -66,6 +68,7 @@ export const adminAuthMe = async (req, res) => {
             res.status(403).json({
                 message: 'Пользователь не найден'
             })
+            return;
         }
 
         const token = jwt.sign({
